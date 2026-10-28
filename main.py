@@ -2266,6 +2266,9 @@ def main():
         print("Model saved successfully to models/xgboost_model.pkl" if ok else "Training failed — check xgboost installation.")
         sys.exit(0)
 
+    import signal
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
     app = QApplication(sys.argv)
     app.setApplicationName("FSOC AI Tracking System")
 
