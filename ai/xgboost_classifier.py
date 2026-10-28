@@ -50,9 +50,11 @@ class DisturbanceClassifier:
         if not os.path.exists(MODEL_PATH):
             return
         try:
-            import pickle
-            with open(MODEL_PATH, "rb") as f:
-                self._xgb = pickle.load(f)
+            import pickle, warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", UserWarning)
+                with open(MODEL_PATH, "rb") as f:
+                    self._xgb = pickle.load(f)
             self._mode = "XGBoost"
         except Exception as e:
             print(f"[XGB] Could not load model: {e}")
